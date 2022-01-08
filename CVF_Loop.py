@@ -1,4 +1,5 @@
 from tkinter import *
+from os.path import *
 import socket
 import datetime
 import os
@@ -29,13 +30,15 @@ def task():
     
 
 def find_driver():
-    for file in os.listdir(r'C:\windows\system32\drivers'):
-        if file == "bam.sys":
-            return file + " found. Nvme driver detected"
-       # else:
-          #  return "no driver detected, check hardware."
+    found = exists(r'C:\windows\system32\drivers\WdNvmeDriver.sys') 
+    if found:
+        return "- WdNvmeDriver detected... Drive detected."
+    else:
+        return "- WdNvmeDriver not detected. Check hardware."
+    
 
-Driver_Label = Label(None, text = find_driver(), width=30, font =('bold, 12'))
+
+Driver_Label = Label(None, text = find_driver(), width=40, font =('bold, 12'))
 Driver_Label.place(x=10, y=60) 
 
      
